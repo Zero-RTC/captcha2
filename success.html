@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Successful</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #28a745;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-in-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .checkmark::after {
+            content: '✓';
+            font-size: 50px;
+            color: white;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #28a745;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .message {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .info-box {
+            background: #f8f9ff;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #d4edda;
+            color: #155724;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 20px 0;
+            border: 2px solid #28a745;
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="checkmark"></div>
+        
+        <h1>Verification Successful!</h1>
+        
+        <div class="badge">HUMAN VERIFIED</div>
+        
+        <p class="message">
+            Congratulations! You have successfully proven that you are a human with access to financial resources. 
+            Your payment has been received and your humanity has been confirmed.
+        </p>
+
+        <div class="info-box">
+            <h3 style="margin-bottom: 15px; color: #333;">Verification Details</h3>
+            
+            <div class="info-row">
+                <span class="info-label">Status:</span>
+                <span class="info-value" style="color: #28a745;">VERIFIED</span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Verification Date:</span>
+                <span class="info-value" id="verificationDate"></span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Transaction ID:</span>
+                <span class="info-value" id="transactionIdDisplay"></span>
+            </div>
+            
+            <div class="info-row">
+                <span class="info-label">Amount Paid:</span>
+                <span class="info-value">$5.00 USD</span>
+            </div>
+        </div>
+
+        <p class="message" style="font-size: 16px;">
+            You may now proceed to access the content you were trying to reach. 
+            Thank you for participating in the most secure CAPTCHA system ever created.
+        </p>
+
+        <a href="index.html" class="continue-btn">Continue to Main Site</a>
+
+        <div class="footer-note">
+            This verification is valid for this session only. 
+            Future visits may require additional verification.
+        </div>
+    </div>
+
+    <script>
+        // Get transaction ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const transactionId = urlParams.get('tid');
+
+        // Verify the transaction is legitimate
+        async function verifyAccess() {
+            if (!transactionId) {
+                redirectToVerification('No transaction ID provided');
+                return;
+            }
+
+            try {
+                // Try to get verification from shared storage
+                const result = await window.storage.get('verification_' + transactionId, true);
+                
+                if (!result) {
+                    // Fallback to sessionStorage
+                    const sessionData = sessionStorage.getItem('currentVerification');
+                    if (!sessionData) {
+                        redirectToVerification('Invalid or expired verification');
+                        return;
+                    }
+                    
+                    const data = JSON.parse(sessionData);
+                    if (data.transactionId !== transactionId) {
+                        redirectToVerification('Transaction ID mismatch');
+                        return;
+                    }
+                } else {
+                    const verificationData = JSON.parse(result.value);
+                    if (!verificationData.verified) {
+                        redirectToVerification('Verification not confirmed');
+                        return;
+                    }
+                }
+                
+                // Valid verification - show success page
+                displaySuccessPage();
+            } catch (error) {
+                // If storage check fails, check sessionStorage as backup
+                const sessionData = sessionStorage.getItem('currentVerification');
+                if (sessionData) {
+                    const data = JSON.parse(sessionData);
+                    if (data.transactionId === transactionId && data.verified) {
+                        displaySuccessPage();
+                        return;
+                    }
+                }
+                redirectToVerification('Verification system error');
+            }
+        }
+
+        function redirectToVerification(reason) {
+            alert('Access denied: ' + reason + '. Please complete the verification process.');
+            window.location.href = 'index.html';
+        }
+
+        function displaySuccessPage() {
+            // Set current date and time
+            const now = new Date();
+            const dateString = now.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('verificationDate').textContent = dateString;
+
+            // Generate session ID
+            const sessionId = 'SESSION-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            document.getElementById('sessionId').textContent = sessionId;
+
+            // Display transaction ID
+            document.getElementById('transactionIdDisplay').textContent = transactionId;
+
+            // Create confetti effect
+            createConfetti();
+
+            // Store verification in session
+            sessionStorage.setItem('humanVerified', 'true');
+            sessionStorage.setItem('verificationTime', now.toISOString());
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#28a745', '#ffc107', '#e74c3c'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 3000);
+                }, i * 30);
+            }
+        }
+
+        // Run verification on page load
+        verifyAccess();
+    </script>
+</body>
+</html>
