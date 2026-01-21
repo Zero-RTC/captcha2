@@ -30,6 +30,13 @@
             width: 100%;
             text-align: center;
             animation: fadeIn 0.5s ease-in;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .container.verified {
+            opacity: 1;
+            visibility: visible;
         }
 
         @keyframes fadeIn {
@@ -203,6 +210,11 @@
             </div>
             
             <div class="info-row">
+                <span class="info-label">Session ID:</span>
+                <span class="info-value" id="sessionId"></span>
+            </div>
+            
+            <div class="info-row">
                 <span class="info-label">Transaction ID:</span>
                 <span class="info-value" id="transactionIdDisplay"></span>
             </div>
@@ -227,11 +239,11 @@
     </div>
 
     <script>
-        // Get transaction ID from URL
+        
         const urlParams = new URLSearchParams(window.location.search);
         const transactionId = urlParams.get('tid');
 
-        // Verify the transaction is legitimate
+       
         async function verifyAccess() {
             if (!transactionId) {
                 redirectToVerification('No transaction ID provided');
@@ -239,11 +251,11 @@
             }
 
             try {
-                // Try to get verification from shared storage
+               
                 const result = await window.storage.get('verification_' + transactionId, true);
                 
                 if (!result) {
-                    // Fallback to sessionStorage
+                  
                     const sessionData = sessionStorage.getItem('currentVerification');
                     if (!sessionData) {
                         redirectToVerification('Invalid or expired verification');
@@ -263,10 +275,10 @@
                     }
                 }
                 
-                // Valid verification - show success page
+                
                 displaySuccessPage();
             } catch (error) {
-                // If storage check fails, check sessionStorage as backup
+        
                 const sessionData = sessionStorage.getItem('currentVerification');
                 if (sessionData) {
                     const data = JSON.parse(sessionData);
@@ -285,7 +297,10 @@
         }
 
         function displaySuccessPage() {
-            // Set current date and time
+           
+            document.querySelector('.container').classList.add('verified');
+            
+            
             const now = new Date();
             const dateString = now.toLocaleDateString('en-US', { 
                 year: 'numeric', 
@@ -296,22 +311,21 @@
             });
             document.getElementById('verificationDate').textContent = dateString;
 
-            // Generate session ID
             const sessionId = 'SESSION-' + Math.random().toString(36).substr(2, 9).toUpperCase();
             document.getElementById('sessionId').textContent = sessionId;
 
-            // Display transaction ID
+          
             document.getElementById('transactionIdDisplay').textContent = transactionId;
 
-            // Create confetti effect
+          
             createConfetti();
 
-            // Store verification in session
+        
             sessionStorage.setItem('humanVerified', 'true');
             sessionStorage.setItem('verificationTime', now.toISOString());
         }
 
-        // Create confetti effect
+     
         function createConfetti() {
             const colors = ['#667eea', '#764ba2', '#28a745', '#ffc107', '#e74c3c'];
             
@@ -329,7 +343,7 @@
             }
         }
 
-        // Run verification on page load
+       
         verifyAccess();
     </script>
 </body>
